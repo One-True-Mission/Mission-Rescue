@@ -10,18 +10,63 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+  <!-- Fixed background (does not move/zoom on scroll) -->
   <div class="bg" role="img" aria-label="Five fluffy puppies playing together in the grass"></div>
   <div class="shade" aria-hidden="true"></div>
 
-  <main class="wrap">
+  <!-- Hamburger -->
+  <button class="hamburger" aria-label="Open menu" aria-controls="sidemenu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Off-canvas menu + backdrop -->
+  <div class="backdrop" data-close></div>
+  <nav id="sidemenu" class="sidemenu" aria-hidden="true">
+    <div class="menu-inner">
+      <!-- Primary supports link to Shopify -->
+      <a class="menu-item primary" href="https://1x2f63-7u.myshopify.com/" target="_blank" rel="noopener">
+        One True Mission | Click-to-support
+      </a>
+      <hr class="divider" />
+      <a class="menu-item" href="index.html">Home</a>
+      <hr class="divider" />
+      <a class="menu-item" href="about.html">About Mission</a>
+      <hr class="divider" />
+      <a class="menu-item" href="happy-home.html">Happy Home</a>
+    </div>
+  </nav>
+
+  <main class="wrap" id="top">
+    <!-- Hero / CTA -->
     <header class="hero" aria-labelledby="site-title">
       <h1 id="site-title">Find Your New Best Friend</h1>
       <p class="tagline">Adopt, foster, or support a local shelter today.</p>
-      <a class="cta" href="#" aria-label="Go to adoption or rescue page">
-        Adopt a Puppy • Help Rescue an Animal
-      </a>
+
+      <!-- CTA with dropdown -->
+      <div class="cta-group">
+        <button id="adoptCta"
+                class="cta has-caret"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="adoptMenu">
+          Adopt a Puppy • Help Rescue an Animal
+        </button>
+
+        <div id="adoptMenu" class="cta-menu" role="menu" aria-hidden="true">
+          <a role="menuitem" class="cta-item"
+             href="https://mansfieldpetadoptions.spread.name/?page=1" target="_blank" rel="noopener">
+            Adopt Mansfield, TX
+          </a>
+          <a role="menuitem" class="cta-item"
+             href="https://www.gptx.org/Departments/Animal-Services/Prairie-Paws-Adoption-Center-Formerly-Grand-Prairie-Animal-Services-Adoption-Center/Animals-at-Our-Facility"
+             target="_blank" rel="noopener">
+            Adopt Grand Prairie
+          </a>
+        </div>
+      </div>
     </header>
 
+    <!-- About bubble -->
     <section class="bubble" aria-labelledby="about-title">
       <h2 id="about-title">About This Rescue Effort</h2>
       <p>
@@ -30,7 +75,7 @@
         fostering easier, and encourage direct support for the organizations doing the daily work.
       </p>
       <p>
-        When you click the button above, you’ll be taken to our partner page where you can browse
+        When you click the button above, you’ll be taken to partner pages where you can browse
         adoptable pets, start a foster application, or learn how to donate supplies and funds.
         If you’re not ready to adopt, that’s okay—sharing this page helps more animals get seen.
       </p>
