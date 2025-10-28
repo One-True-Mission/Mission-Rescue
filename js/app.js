@@ -39,6 +39,12 @@
     }
   });
 
+  // Prevent navigation on placeholder link (looks normal but no nav yet)
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a.menu-item.placeholder');
+    if (a) e.preventDefault();
+  });
+
   // ----- CTA dropdown -----
   const ctaBtn = document.getElementById('adoptCta');
   const ctaMenu = document.getElementById('adoptMenu');
