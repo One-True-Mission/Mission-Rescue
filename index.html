@@ -6,7 +6,8 @@
   <title>Adopt • Help Rescue Animals</title>
   <meta name="description" content="Help local shelters: adopt, foster, or donate. Every small act makes a big difference." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Inter + Poppins for stronger menu title -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -23,16 +24,31 @@
   <div class="backdrop" data-close></div>
   <nav id="sidemenu" class="sidemenu" aria-hidden="true">
     <div class="menu-inner">
-      <!-- Primary supports link to Shopify -->
+      <!-- Brand label above the CTA -->
+      <div class="menu-header" aria-hidden="true">
+        <span class="brand">One True Mission</span>
+        <span class="sub">Wear the mission. Make an impact.</span>
+      </div>
+
+      <!-- Primary support button -->
       <a class="menu-item primary" href="https://1x2f63-7u.myshopify.com/" target="_blank" rel="noopener">
-        One True Mission | Click-to-support
+        Help Support • Click-Here
       </a>
+
       <hr class="divider" />
-      <a class="menu-item" href="index.html">Home</a>
+
+      <!-- Site nav -->
+      <a class="menu-item" href="index.html" aria-current="page">Home</a>
       <hr class="divider" />
       <a class="menu-item" href="about.html">About Mission</a>
       <hr class="divider" />
-      <a class="menu-item" href="happy-home.html">Happy Home</a>
+      <a class="menu-item" href="happy-home.html">New Pet Resources</a>
+      <hr class="divider" />
+
+      <!-- Placeholder (white like others; JS blocks click) -->
+      <a class="menu-item placeholder" href="#" aria-disabled="true" title="Coming soon">
+        Lessons of Love &amp; Loss
+      </a>
     </div>
   </nav>
 
@@ -66,39 +82,35 @@
       </div>
     </header>
 
-     <!-- Main info bubble -->
-<section class="bubble" aria-labelledby="about-title">
-  <h2 id="about-title">How This Website Works</h2>
+    <!-- Main info bubble -->
+    <section class="bubble" aria-labelledby="about-title">
+      <h2 id="about-title">How This Website Works</h2>
 
-  <p>
-    Welcome to our mission! This site makes it easy to help rescue animals and
-    connect them with loving homes. To get started, simply click the green
-    <strong>“Adopt a Puppy • Help Rescue an Animal”</strong> button above, you’ll see
-    a drop-down where you can choose between <strong>Mansfield</strong> and
-    <strong>Grand Prairie</strong> shelters. Each link takes you directly to the
-    available pets at those adoption centers.
-  </p>
+      <p>
+        Welcome to our mission! This site makes it easy to help rescue animals and
+        connect them with loving homes. To get started, simply click the green
+        <strong>“Adopt a Puppy • Help Rescue an Animal”</strong> button above—then choose
+        <strong>Mansfield</strong> or <strong>Grand Prairie</strong> shelters to view adoptable pets.
+      </p>
 
-  <p>
-    Want to know more about the heart behind this mission? Visit our
-    <strong>About</strong> page in the menu to read how we’re working to rescue,
-    rehabilitate, and rehome animals in need.
-  </p>
+      <p>
+        Want to know more about the heart behind this mission? Visit our
+        <strong>About</strong> page in the menu to read how we’re working to rescue,
+        rehabilitate, and rehome animals in need.
+      </p>
 
-  <p>
-    Be sure to check out our <strong>Happy Homes</strong> section to see the
-    transformations, from sad beginnings to happy homes, and the real impact
-    your support makes.
-  </p>
+      <p>
+        Be sure to check out <strong>New Pet Resources</strong> for trusted links and tips to
+        keep puppies and kittens healthy, safe, and thriving.
+      </p>
 
-  <p>
-    Not ready to adopt? You can still make a difference! Click the
-    <strong>“Click Here to Support”</strong> button to visit our clothing store.
-    Every purchase helps donate <strong>15% of profits</strong> directly back to
-    local animal shelters. It’s an easy way to wear your compassion and save
-    lives at the same time.
-  </p>
-</section>
+      <p>
+        Not ready to adopt? You can still make a difference! Click the
+        <strong>“Click Here to Support”</strong> button to visit our clothing store.
+        Every purchase helps donate <strong>15% of profits</strong> directly back to
+        local animal shelters.
+      </p>
+    </section>
 
     <footer class="site-footer" role="contentinfo">
       <p>&copy; <span id="year"></span> Animal Rescue Network</p>
