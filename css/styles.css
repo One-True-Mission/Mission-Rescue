@@ -187,11 +187,14 @@ body {
 /* Centered, symmetric text inside the bubble */
 .bubble p,
 .bubble ul{
-  max-width: 70ch;
+  max-width: 60ch;              /* was 70ch — balances lines better */
   margin-left: auto;
   margin-right: auto;
   color: #eef2f1;
   text-align: center;
+  line-height: 1.6;             /* smoother wrap */
+  letter-spacing: 0.1px;
+  text-wrap: balance;           /* modern browsers: avoid one-word last lines */
 }
 .bubble .highlights{
   list-style: "🐾  ";
