@@ -44,7 +44,6 @@ body {
   position: fixed;
   top: 0; left: 0;
 
-  /* desktop-safe defaults */
   width: 100vw;
   height: 100vh;
 
@@ -60,7 +59,6 @@ body {
   will-change: transform;
   z-index: -2;
 }
-/* Prefer logical viewport units (great for iOS) */
 @supports (height: 100lvh) {
   .bg{ width: 100lvw; height: 100lvh; }
 }
@@ -124,7 +122,7 @@ body {
 .cta:hover{
   transform: translateY(-1px);
   opacity: .98;
-  box-shadow: 0 0 0 3px rgba(34,197,94,0.22), var(--shadow); /* subtle ring */
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.22), var(--shadow);
 }
 .cta:active{ transform: translateY(0); }
 .cta:focus{ outline: 3px solid var(--accent); outline-offset: 3px; }
@@ -135,8 +133,6 @@ body {
   margin: 0 auto;
   padding: 22px 22px 18px;
   position: relative;
-
-  /* LOWERED – exact control */
   margin-top: 36vh;
 }
 .bubble::before{
@@ -153,7 +149,6 @@ body {
   box-shadow: var(--card-shadow);
   z-index: -1;
 }
-/* Small “tail” tinted to the card */
 .bubble::after{
   content: "";
   position: absolute;
@@ -178,7 +173,6 @@ body {
   letter-spacing: 0.2px;
   position: relative;
 }
-/* subtle accent underline */
 .bubble h2::after{
   content: "";
   display: block;
@@ -197,12 +191,12 @@ body {
   margin-left: auto;
   margin-right: auto;
   color: #eef2f1;
-  text-align: center;         /* center align text */
+  text-align: center;
 }
 .bubble .highlights{
   list-style: "🐾  ";
-  list-style-position: inside; /* keep bullets centered with text */
-  padding-left: 0;             /* remove left offset so it centers perfectly */
+  list-style-position: inside;
+  padding-left: 0;
   margin: 12px auto 6px;
 }
 .bubble .footnote{
@@ -219,7 +213,7 @@ body {
   opacity: .9;
 }
 
-/* Small screens (no margin-top override, so phone honors 39vh) */
+/* Small screens tweaks */
 @media (max-width: 480px){
   .hero{ padding: 16vh var(--pad) 8vh; }
   .bubble{ padding: 18px 16px 14px; }
@@ -282,7 +276,34 @@ body {
 .backdrop.show{ opacity: 1; pointer-events: auto; }
 
 .menu-inner{ padding: 16px; }
+
+/* Off-canvas header label — centered + bolder display font */
+.menu-header{
+  display: block;
+  padding: 10px 2px 12px;
+  color: #e5e7eb;
+  opacity: .98;
+  text-align: center;
+}
+.menu-header .brand{
+  display: block;
+  font-family: Poppins, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(20px, 4.2vw, 24px);
+  letter-spacing: .2px;
+  color: #f8fafc;
+}
+.menu-header .sub{
+  display: block;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 600;
+  font-size: clamp(13px, 2.9vw, 14px);
+  opacity: .88;
+}
+
+/* Menu items */
 .menu-item{
+  position: relative;             /* for active accent */
   display: block;
   padding: 14px 12px;
   border-radius: 10px;
@@ -291,19 +312,42 @@ body {
   font-weight: 600;
 }
 .menu-item:hover{ background: rgba(255,255,255,.08); }
+
+/* Primary CTA in menu */
 .menu-item.primary{
-  background: linear-gradient(180deg, rgba(34,197,94,.95), rgba(22,163,74,.95));
+  background: linear-gradient(180deg, rgba(34,197,94,.98), rgba(22,163,74,.98));
   color: #fff;
-  border: 1px solid rgba(255,255,255,.2);
+  border: 1px solid rgba(255,255,255,.22);
   text-align: center;
+  box-shadow: 0 10px 28px rgba(0,0,0,.28) inset, 0 10px 28px rgba(0,0,0,.24);
 }
 .menu-item.primary:hover{ filter: brightness(1.02); }
+
+/* Placeholder looks like a normal white item (no special styling) */
+.menu-item.placeholder{}
+
+/* Slim left accent for the current page — pushed left, text cleared */
+.menu-item[aria-current="page"]{
+  background: rgba(255,255,255,.06);
+  padding-left: 26px;                 /* add space so text never overlaps the bar */
+}
+.menu-item[aria-current="page"]::before{
+  content: "";
+  position: absolute;
+  left: 4px;                          /* push accent closer to the item’s left edge */
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--accent-green), #16a34a);
+  box-shadow: 0 0 0 2px rgba(34,197,94,.12), 0 0 10px rgba(34,197,94,.28);
+}
 
 .divider{
   height: 1px;
   border: 0;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
-  margin: 10px 0;
+  margin: 10px 0 12px;
 }
 
 /* ===== CTA dropdown ===== */
@@ -330,15 +374,12 @@ body {
 .cta-item:hover{ filter: brightness(1.05); }
 
 /* ===== Responsive background framing ===== */
-/* Taller screens (phones) – fill top-to-bottom */
 @media (max-aspect-ratio: 9/16) {
   :root { --bg-pos: 50% 76%; --bg-fit: cover; }
 }
-/* Standard to wide desktops – natural fit with light bleed (~108%) */
 @media (min-aspect-ratio: 16/9) {
   :root { --bg-pos: 50% 70%; --bg-fit: 108% auto; }
 }
-/* Ultrawide monitors */
 @media (min-aspect-ratio: 21/9) {
   :root { --bg-pos: 50% 68%; --bg-fit: 110% auto; }
 }
