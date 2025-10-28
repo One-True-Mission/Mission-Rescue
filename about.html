@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>About Mission • One True Mission</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -16,17 +16,34 @@
     <span></span><span></span><span></span>
   </button>
   <div class="backdrop" data-close></div>
+
   <nav id="sidemenu" class="sidemenu" aria-hidden="true">
     <div class="menu-inner">
+      <!-- Brand label above the CTA -->
+      <div class="menu-header" aria-hidden="true">
+        <span class="brand">One True Mission</span>
+        <span class="sub">Wear the mission. Make an impact.</span>
+      </div>
+
+      <!-- Primary support button -->
       <a class="menu-item primary" href="https://1x2f63-7u.myshopify.com/" target="_blank" rel="noopener">
-        One True Mission | Click-to-support
+        Help Support • Click-Here
       </a>
+
       <hr class="divider" />
+
+      <!-- Site nav -->
       <a class="menu-item" href="index.html">Home</a>
       <hr class="divider" />
-      <a class="menu-item" href="about.html">About Mission</a>
+      <a class="menu-item" href="about.html" aria-current="page">About Mission</a>
       <hr class="divider" />
-      <a class="menu-item" href="happy-home.html">Happy Home</a>
+      <a class="menu-item" href="happy-home.html">New Pet Resources</a>
+      <hr class="divider" />
+
+      <!-- Placeholder (white like others; JS blocks click) -->
+      <a class="menu-item placeholder" href="#" aria-disabled="true" title="Coming soon">
+        Lessons of Love &amp; Loss
+      </a>
     </div>
   </nav>
 
