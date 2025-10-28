@@ -3,18 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Happy Home • Adoption Stories</title>
+  <title>New Pet Parent Resources • Kittens & Puppies</title>
+  <meta name="description" content="Trusted resources for new puppy and kitten parents—health, safety, nutrition, and shelter-specific tips." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <div class="bg" role="img" aria-label="Five fluffy puppies playing together in the grass"></div>
+  <!-- Fixed background (does not move/zoom on scroll) -->
+  <div class="bg" role="img" aria-label="A puppy and kitten cuddled together on a cozy blanket"></div>
   <div class="shade" aria-hidden="true"></div>
 
+  <!-- Hamburger -->
   <button class="hamburger" aria-label="Open menu" aria-controls="sidemenu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
+
+  <!-- Off-canvas menu + backdrop -->
   <div class="backdrop" data-close></div>
   <nav id="sidemenu" class="sidemenu" aria-hidden="true">
     <div class="menu-inner">
@@ -26,25 +31,162 @@
       <hr class="divider" />
       <a class="menu-item" href="about.html">About Mission</a>
       <hr class="divider" />
-      <a class="menu-item" href="happy-home.html">Happy Home</a>
+      <a class="menu-item" href="happy-home.html" aria-current="page">Happy Home</a>
     </div>
   </nav>
 
-  <main class="wrap">
-    <header class="hero" aria-labelledby="hh-title">
-      <h1 id="hh-title">Happy Home</h1>
-      <p class="tagline">Adoption success stories from our community.</p>
+  <main class="wrap" id="top">
+    <!-- Hero -->
+    <header class="hero" aria-labelledby="page-title">
+      <h1 id="page-title">New Pet Parent Resources</h1>
+      <p class="tagline">Hand-picked links from trusted veterinary sources to help your kitten or puppy thrive.</p>
+
+      <!-- (Optional) keep your CTA dropdown for consistency -->
+      <div class="cta-group">
+        <button id="adoptCta"
+                class="cta has-caret"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="adoptMenu">
+          Adopt a Puppy • Help Rescue an Animal
+        </button>
+
+        <div id="adoptMenu" class="cta-menu" role="menu" aria-hidden="true">
+          <a role="menuitem" class="cta-item"
+             href="https://mansfieldpetadoptions.spread.name/?page=1" target="_blank" rel="noopener">
+            Adopt Mansfield, TX
+          </a>
+          <a role="menuitem" class="cta-item"
+             href="https://www.gptx.org/Departments/Animal-Services/Prairie-Paws-Adoption-Center-Formerly-Grand-Prairie-Animal-Services-Adoption-Center/Animals-at-Our-Facility"
+             target="_blank" rel="noopener">
+            Adopt Grand Prairie
+          </a>
+        </div>
+      </div>
     </header>
 
-    <section class="bubble">
-      <h2>Information coming soon</h2>
+    <!-- Intro -->
+    <section class="bubble" aria-labelledby="intro-title">
+      <h2 id="intro-title">Start Here</h2>
       <p>
-        We’re gathering heartwarming stories and photos of animals who found their forever homes.
-        Check back soon!
+        Bringing home a new kitten or puppy is exciting—and a big responsibility.
+        Until we publish our own in-depth guides, here are trusted resources
+        you can use right now for health, safety, nutrition, and adoption tips.
       </p>
     </section>
 
-    <footer class="site-footer">
+    <!-- General Puppy & Kitten Care -->
+    <section class="bubble" aria-labelledby="general-title">
+      <h2 id="general-title">General Puppy &amp; Kitten Care</h2>
+      <ul class="highlights">
+        <li>
+          <a href="https://www.vets4pets.com/pet-health-advice/puppy-and-kitten-hub/" target="_blank" rel="noopener">
+            Vets4Pets Puppy &amp; Kitten Hub
+          </a> — Starter guides on vaccines, feeding, settling in, and more.
+        </li>
+        <li>
+          <a href="https://www.aspca.org/pet-care" target="_blank" rel="noopener">
+            ASPCA Pet Care
+          </a> — Behavior basics, safety, and general wellness info.
+        </li>
+      </ul>
+    </section>
+
+    <!-- Puppy Health & Safety -->
+    <section class="bubble" aria-labelledby="puppy-title">
+      <h2 id="puppy-title">Puppy Health &amp; Safety</h2>
+      <ul class="highlights">
+        <li>
+          <a href="https://www.petmd.com/dog/general-health/7-common-puppy-illnesses-and-how-to-protect" target="_blank" rel="noopener">
+            PetMD: Common Puppy Illnesses &amp; Prevention
+          </a>
+        </li>
+        <li>
+          <a href="https://vcahospitals.com/know-your-pet/puppy-raising" target="_blank" rel="noopener">
+            VCA Hospitals: Puppy Care Basics
+          </a>
+        </li>
+        <li>
+          <a href="https://www.petsbest.com/blog/common-puppy-diseases-and-illnesses" target="_blank" rel="noopener">
+            Pets Best: Common Puppy Diseases &amp; Illnesses
+          </a>
+        </li>
+      </ul>
+      <p class="footnote">🐶 Tip: Shelter puppies may have higher exposure risk. Schedule a vet visit within a week of adoption.</p>
+    </section>
+
+    <!-- Kitten Health & Safety -->
+    <section class="bubble" aria-labelledby="kitten-title">
+      <h2 id="kitten-title">Kitten Health &amp; Safety</h2>
+      <ul class="highlights">
+        <li>
+          <a href="https://www.zoetispetcare.com/blog/article/kitten-season-diseases" target="_blank" rel="noopener">
+            Zoetis: Common Kitten Diseases
+          </a>
+        </li>
+        <li>
+          <a href="https://www.purina.com/articles/cat/kitten/health/sick-kitten" target="_blank" rel="noopener">
+            Purina: Caring for Your Kitten
+          </a>
+        </li>
+        <li>
+          <a href="https://www.royalcanin.com/us/cats/kitten/taking-care-of-your-kittens-health/common-symptoms-of-illness-in-kittens" target="_blank" rel="noopener">
+            Royal Canin: Kitten Health Tips
+          </a>
+        </li>
+      </ul>
+      <p class="footnote">🐱 Tip: Found kittens often have parasites or fleas. Visit your vet before introducing them to other pets.</p>
+    </section>
+
+    <!-- Nutrition & Safety -->
+    <section class="bubble" aria-labelledby="nutrition-title">
+      <h2 id="nutrition-title">Nutrition &amp; Foods to Avoid</h2>
+      <ul class="highlights">
+        <li>
+          <a href="https://www.aspca.org/pet-care/aspca-poison-control/people-foods-avoid-feeding-your-pets" target="_blank" rel="noopener">
+            ASPCA: People Foods to Avoid
+          </a>
+        </li>
+        <li>
+          <a href="https://mypetandi.elanco.com/en_ca/puppy-kitten/feeding-your-puppy-and-kitten-essential-nutrition-tips" target="_blank" rel="noopener">
+            Elanco: Nutrition Tips for Puppies &amp; Kittens
+          </a>
+        </li>
+      </ul>
+      <p class="footnote">🍽️ Feed life-stage-specific diets; avoid table scraps. Chocolate, grapes/raisins, onions/garlic, and raw meats are dangerous.</p>
+    </section>
+
+    <!-- Shelter & Adoption Tips -->
+    <section class="bubble" aria-labelledby="shelter-title">
+      <h2 id="shelter-title">Shelter &amp; Adoption Tips</h2>
+      <ul class="highlights">
+        <li>
+          <a href="https://humanesocietyofcharlotte.org/services/community-cats-services/findingkittens/caring-for-kittens-5-weeks-and-older/" target="_blank" rel="noopener">
+            Humane Society: Caring for Found Kittens
+          </a>
+        </li>
+        <li>
+          <a href="https://www.kitsap-humane.org/wp-content/uploads/2023/02/Puppy-and-Bottle-Baby-Manual-Website-Version.pdf" target="_blank" rel="noopener">
+            Kitsap Humane Society: Puppy Manual (PDF)
+          </a>
+        </li>
+      </ul>
+      <p class="footnote">🏠 Many shelter pets come from tough beginnings—routine vet care, clean bedding/bowls, and gradual socialization make a huge difference.</p>
+    </section>
+
+    <!-- Closing CTA -->
+    <section class="bubble" aria-labelledby="cta-title">
+      <h2 id="cta-title">Ready to Make a Difference?</h2>
+      <p>
+        Every adoption saves lives—and every purchase helps us donate
+        <strong>15% of profits</strong> to local animal shelters.
+      </p>
+      <p style="text-align:center;">
+        <a class="cta" href="https://1x2f63-7u.myshopify.com/" target="_blank" rel="noopener">Click Here to Support</a>
+      </p>
+    </section>
+
+    <footer class="site-footer" role="contentinfo">
       <p>&copy; <span id="year"></span> Animal Rescue Network</p>
     </footer>
   </main>
