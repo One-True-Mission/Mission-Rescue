@@ -1,4 +1,4 @@
-/* ---------- styles.css (fixed) ---------- */
+/* ---------- styles.css (final desktop+mobile + glass card, centered text) ---------- */
 :root{
   --maxw: 980px;
   --pad: 18px;
@@ -13,17 +13,18 @@
   --cta-bg: #16a34a;
   --cta-ink: #ffffff;
 
-  /* Bubble now black ~30% transparent (0.70 opacity) */
-  --bubble: rgba(0,0,0,0.70);
-
-  /* Slight overall darkening for readability */
-  --shade: rgba(0,0,0,.28);
+  /* Glass card theme tokens */
+  --card-bg: rgba(12, 20, 17, 0.52);          /* deep greenish glass */
+  --card-bg-strong: rgba(12, 20, 17, 0.72);   /* for the “tail” */
+  --card-border: rgba(255,255,255,0.18);
+  --card-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  --card-blur: 10px;
+  --accent-green: #22c55e;
 
   /* Background image controls */
   --bg-url: url("../assets/puppies-hero.jpg");
-  --bg-pos: 50% 50%;
-  /* Use 'contain' to show entire image; switch to 'cover' if you want edge-to-edge */
-  --bg-fit: contain;
+  --bg-pos: 50% 72%;   /* keep animals in view */
+  --bg-fit: cover;     /* default fill */
 }
 
 * { box-sizing: border-box; }
@@ -34,41 +35,50 @@ body {
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   line-height: 1.5;
   color: var(--ink-on-dark);
-  background: #000; /* letterbox behind 'contain' */
+  background: #000; /* safe fallback; .bg covers it */
   overscroll-behavior: none;
 }
 
-/* ===== Fixed background that does NOT zoom on scroll =====
-   Lock to layout viewport to avoid iOS URL bar height changes. */
+/* ===== Fixed background that fills desktop & mobile ===== */
 .bg{
   position: fixed;
   top: 0; left: 0;
-  width: 100lvw;
-  height: 100lvh;
+
+  /* desktop-safe defaults */
+  width: 100vw;
+  height: 100vh;
+
   background-image: var(--bg-url);
   background-position: var(--bg-pos);
   background-repeat: no-repeat;
   background-size: var(--bg-fit);
   background-color: #000;
+
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   backface-visibility: hidden;
   will-change: transform;
   z-index: -2;
 }
-/* Fallback for browsers without lvh/lvw support */
-@supports not (height: 100lvh) {
-  .bg{
-    width: 100svw;
-    height: 100svh;  /* stable viewport units help prevent “zoom” */
-  }
+/* Prefer logical viewport units (great for iOS) */
+@supports (height: 100lvh) {
+  .bg{ width: 100lvw; height: 100lvh; }
 }
 
-/* Subtle global shade for contrast on top of photo */
+/* Top/bottom fades for readability (transparent mid) */
 .shade{
   position: fixed;
   inset: 0;
-  background: var(--shade);
+  background:
+    linear-gradient(to top,
+      rgba(0,0,0,0.55) 0%,
+      rgba(0,0,0,0.38) 22%,
+      rgba(0,0,0,0.18) 45%,
+      rgba(0,0,0,0.00) 60%),
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.35) 0%,
+      rgba(0,0,0,0.18) 8%,
+      rgba(0,0,0,0.00) 18%);
   z-index: -1;
 }
 
@@ -111,29 +121,39 @@ body {
   box-shadow: var(--shadow);
   transition: transform .06s ease, box-shadow .2s ease, opacity .2s ease;
 }
-.cta:hover{ transform: translateY(-1px); opacity: .96; }
+.cta:hover{
+  transform: translateY(-1px);
+  opacity: .98;
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.22), var(--shadow); /* subtle ring */
+}
 .cta:active{ transform: translateY(0); }
 .cta:focus{ outline: 3px solid var(--accent); outline-offset: 3px; }
 
-/* ===== About “speech-bubble” ===== */
+/* ===== Glass Card Bubble ===== */
 .bubble{
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 16px;
+  padding: 22px 22px 18px;
   position: relative;
 
-  /* Start lower so the opening view shows the hero + CTA + background */
-  margin-top: clamp(60px, 16vh, 180px);
+  /* LOWERED – exact control */
+  margin-top: 36vh;
 }
 .bubble::before{
   content: "";
   position: absolute;
   inset: 0;
   border-radius: var(--radius);
-  background: var(--bubble);    /* now black @ 70% opacity */
-  box-shadow: var(--shadow);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+    var(--card-bg);
+  backdrop-filter: blur(var(--card-blur)) saturate(120%);
+  -webkit-backdrop-filter: blur(var(--card-blur)) saturate(120%);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
   z-index: -1;
 }
+/* Small “tail” tinted to the card */
 .bubble::after{
   content: "";
   position: absolute;
@@ -141,31 +161,53 @@ body {
   bottom: -14px;
   width: 26px;
   height: 26px;
-  background: var(--bubble);    /* tail matches bubble color */
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+    var(--card-bg-strong);
   transform: rotate(45deg);
-  box-shadow: 6px 6px 20px rgba(0,0,0,.15);
+  box-shadow: 6px 6px 20px rgba(0,0,0,.18);
+  border-left: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
   z-index: -1;
 }
 .bubble h2{
   text-align: center;
-  margin: 18px auto 12px;
+  margin: 4px auto 14px;
   font-size: clamp(22px, 4.5vw, 28px);
-  color: #f8fafc;               /* ensure good contrast on dark bubble */
+  color: #f8fafc;
+  letter-spacing: 0.2px;
+  position: relative;
 }
-.bubble p, .bubble ul{
+/* subtle accent underline */
+.bubble h2::after{
+  content: "";
+  display: block;
+  width: 72px;
+  height: 3px;
+  margin: 10px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+  opacity: .9;
+}
+
+/* Centered, symmetric text inside the bubble */
+.bubble p,
+.bubble ul{
   max-width: 70ch;
   margin-left: auto;
   margin-right: auto;
-  color: #f3f4f6;               /* readable on dark */
+  color: #eef2f1;
+  text-align: center;         /* center align text */
 }
 .bubble .highlights{
   list-style: "🐾  ";
-  padding-left: 1.2ch;
+  list-style-position: inside; /* keep bullets centered with text */
+  padding-left: 0;             /* remove left offset so it centers perfectly */
   margin: 12px auto 6px;
 }
 .bubble .footnote{
   opacity: .9;
-  font-size: 0.95rem;
+  font-size: .95rem;
 }
 
 /* Footer */
@@ -177,11 +219,17 @@ body {
   opacity: .9;
 }
 
-/* Small screens */
+/* Small screens (no margin-top override, so phone honors 39vh) */
 @media (max-width: 480px){
   .hero{ padding: 16vh var(--pad) 8vh; }
+  .bubble{ padding: 18px 16px 14px; }
+  .bubble::before{
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+  }
   .bubble::after{ left: 24px; }
 }
+
 /* ===== Off-canvas left menu ===== */
 .hamburger{
   position: fixed;
@@ -220,7 +268,7 @@ body {
   width: min(88vw, 320px);
   transform: translateX(-100%);
   transition: transform .22s ease;
-  background: rgba(15,23,42,.92);           /* slate-900 w/ transparency */
+  background: rgba(15,23,42,.92);
   color: #fff;
   backdrop-filter: blur(10px);
   box-shadow: 8px 0 30px rgba(0,0,0,.45);
@@ -230,7 +278,6 @@ body {
 @supports not (height: 100lvh) {
   .sidemenu{ height: 100svh; }
 }
-
 .sidemenu.open{ transform: translateX(0); }
 .backdrop.show{ opacity: 1; pointer-events: auto; }
 
@@ -258,48 +305,40 @@ body {
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
   margin: 10px 0;
 }
+
 /* ===== CTA dropdown ===== */
-.cta-group{
-  position: relative;
-  display: inline-block;
-}
-.has-caret{
-  position: relative;
-  padding-right: 38px; /* room for caret */
-}
+.cta-group{ position: relative; display: inline-block; }
+.has-caret{ position: relative; padding-right: 38px; }
 .has-caret::after{
   content: "";
-  position: absolute;
-  right: 14px; top: 50%;
+  position: absolute; right: 14px; top: 50%;
   width: 8px; height: 8px;
-  border-right: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  transform: translateY(-60%) rotate(45deg);
-  opacity: .9;
+  border-right: 2px solid #fff; border-bottom: 2px solid #fff;
+  transform: translateY(-60%) rotate(45deg); opacity: .9;
 }
 .cta-menu{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: calc(100% + 10px);
-  min-width: 260px;
-  background: var(--cta-bg);
-  color: #fff;
-  border-radius: 14px;
-  box-shadow: 0 14px 40px rgba(0,0,0,.35);
-  padding: 8px;
-  z-index: 5;
-  display: none;
+  position: absolute; left: 50%; transform: translateX(-50%);
+  top: calc(100% + 10px); min-width: 260px;
+  background: var(--cta-bg); color: #fff; border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.35); padding: 8px; z-index: 5; display: none;
 }
 .cta-menu.show{ display: block; }
 .cta-item{
-  display: block;
-  padding: 12px 14px;
-  margin: 4px 0;
-  border-radius: 10px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 700;
-  text-align: center;
+  display: block; padding: 12px 14px; margin: 4px 0; border-radius: 10px;
+  color: #fff; text-decoration: none; font-weight: 700; text-align: center;
 }
 .cta-item:hover{ filter: brightness(1.05); }
+
+/* ===== Responsive background framing ===== */
+/* Taller screens (phones) – fill top-to-bottom */
+@media (max-aspect-ratio: 9/16) {
+  :root { --bg-pos: 50% 76%; --bg-fit: cover; }
+}
+/* Standard to wide desktops – natural fit with light bleed (~108%) */
+@media (min-aspect-ratio: 16/9) {
+  :root { --bg-pos: 50% 70%; --bg-fit: 108% auto; }
+}
+/* Ultrawide monitors */
+@media (min-aspect-ratio: 21/9) {
+  :root { --bg-pos: 50% 68%; --bg-fit: 110% auto; }
+}
