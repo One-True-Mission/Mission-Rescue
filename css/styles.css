@@ -1,4 +1,4 @@
-/* ---------- styles.css (final desktop+mobile + glass card, centered text) ---------- */
+/* ---------- styles.css (dropdown matches button width + submenu centered) ---------- */
 :root{
   --maxw: 980px;
   --pad: 18px;
@@ -14,8 +14,8 @@
   --cta-ink: #ffffff;
 
   /* Glass card theme tokens */
-  --card-bg: rgba(12, 20, 17, 0.52);          /* deep greenish glass */
-  --card-bg-strong: rgba(12, 20, 17, 0.72);   /* for the “tail” */
+  --card-bg: rgba(12, 20, 17, 0.52);
+  --card-bg-strong: rgba(12, 20, 17, 0.72);
   --card-border: rgba(255,255,255,0.18);
   --card-shadow: 0 20px 60px rgba(0,0,0,0.45);
   --card-blur: 10px;
@@ -23,8 +23,8 @@
 
   /* Background image controls */
   --bg-url: url("../assets/puppies-hero.jpg");
-  --bg-pos: 50% 72%;   /* keep animals in view */
-  --bg-fit: cover;     /* default fill */
+  --bg-pos: 50% 72%;
+  --bg-fit: cover;
 }
 
 * { box-sizing: border-box; }
@@ -35,26 +35,21 @@ body {
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   line-height: 1.5;
   color: var(--ink-on-dark);
-  background: #000; /* safe fallback; .bg covers it */
+  background: #000;
   overscroll-behavior: none;
 }
 
-/* ===== Fixed background that fills desktop & mobile ===== */
+/* ===== Fixed background ===== */
 .bg{
   position: fixed;
   top: 0; left: 0;
-
-  width: 100vw;
-  height: 100vh;
-
+  width: 100vw; height: 100vh;
   background-image: var(--bg-url);
   background-position: var(--bg-pos);
   background-repeat: no-repeat;
   background-size: var(--bg-fit);
   background-color: #000;
-
   transform: translateZ(0);
-  -webkit-transform: translateZ(0);
   backface-visibility: hidden;
   will-change: transform;
   z-index: -2;
@@ -63,7 +58,6 @@ body {
   .bg{ width: 100lvw; height: 100lvh; }
 }
 
-/* Top/bottom fades for readability (transparent mid) */
 .shade{
   position: fixed;
   inset: 0;
@@ -80,7 +74,7 @@ body {
   z-index: -1;
 }
 
-/* Content wrapper (scrolls over fixed bg) */
+/* Content wrapper */
 .wrap{
   min-height: 100svh;
   display: grid;
@@ -144,7 +138,6 @@ body {
     linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
     var(--card-bg);
   backdrop-filter: blur(var(--card-blur)) saturate(120%);
-  -webkit-backdrop-filter: blur(var(--card-blur)) saturate(120%);
   border: 1px solid var(--card-border);
   box-shadow: var(--card-shadow);
   z-index: -1;
@@ -152,10 +145,8 @@ body {
 .bubble::after{
   content: "";
   position: absolute;
-  left: 42px;
-  bottom: -14px;
-  width: 26px;
-  height: 26px;
+  left: 42px; bottom: -14px;
+  width: 26px; height: 26px;
   background:
     linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
     var(--card-bg-strong);
@@ -176,35 +167,19 @@ body {
 .bubble h2::after{
   content: "";
   display: block;
-  width: 72px;
-  height: 3px;
+  width: 72px; height: 3px;
   margin: 10px auto 0;
   border-radius: 999px;
   background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
   opacity: .9;
 }
-
-/* Centered, symmetric text inside the bubble */
-.bubble p,
-.bubble ul{
-  max-width: 60ch;              /* was 70ch — balances lines better */
-  margin-left: auto;
-  margin-right: auto;
+.bubble p{
+  max-width: 60ch;
+  margin: 0 auto;
   color: #eef2f1;
   text-align: center;
-  line-height: 1.6;             /* smoother wrap */
+  line-height: 1.6;
   letter-spacing: 0.1px;
-  text-wrap: balance;           /* modern browsers: avoid one-word last lines */
-}
-.bubble .highlights{
-  list-style: "🐾  ";
-  list-style-position: inside;
-  padding-left: 0;
-  margin: 12px auto 6px;
-}
-.bubble .footnote{
-  opacity: .9;
-  font-size: .95rem;
 }
 
 /* Footer */
@@ -216,18 +191,7 @@ body {
   opacity: .9;
 }
 
-/* Small screens tweaks */
-@media (max-width: 480px){
-  .hero{ padding: 16vh var(--pad) 8vh; }
-  .bubble{ padding: 18px 16px 14px; }
-  .bubble::before{
-    backdrop-filter: blur(8px) saturate(120%);
-    -webkit-backdrop-filter: blur(8px) saturate(120%);
-  }
-  .bubble::after{ left: 24px; }
-}
-
-/* ===== Off-canvas left menu ===== */
+/* ===== Off-canvas menu ===== */
 .hamburger{
   position: fixed;
   top: 14px; left: 14px;
@@ -257,6 +221,7 @@ body {
   transition: opacity .18s ease;
   z-index: 49;
 }
+.backdrop.show{ opacity: 1; pointer-events: auto; }
 
 .sidemenu{
   position: fixed;
@@ -272,15 +237,10 @@ body {
   z-index: 51;
   overflow-y: auto;
 }
-@supports not (height: 100lvh) {
-  .sidemenu{ height: 100svh; }
-}
 .sidemenu.open{ transform: translateX(0); }
-.backdrop.show{ opacity: 1; pointer-events: auto; }
-
 .menu-inner{ padding: 16px; }
 
-/* Off-canvas header label — centered + bolder display font */
+/* Menu header */
 .menu-header{
   display: block;
   padding: 10px 2px 12px;
@@ -306,7 +266,7 @@ body {
 
 /* Menu items */
 .menu-item{
-  position: relative;             /* for active accent */
+  position: relative; /* for the current-page bar */
   display: block;
   padding: 14px 12px;
   border-radius: 10px;
@@ -316,7 +276,6 @@ body {
 }
 .menu-item:hover{ background: rgba(255,255,255,.08); }
 
-/* Primary CTA in menu */
 .menu-item.primary{
   background: linear-gradient(180deg, rgba(34,197,94,.98), rgba(22,163,74,.98));
   color: #fff;
@@ -326,20 +285,14 @@ body {
 }
 .menu-item.primary:hover{ filter: brightness(1.02); }
 
-/* Placeholder looks like a normal white item (no special styling) */
-.menu-item.placeholder{}
-
-/* Slim left accent for the current page — pushed left, text cleared */
 .menu-item[aria-current="page"]{
   background: rgba(255,255,255,.06);
-  padding-left: 26px;                 /* add space so text never overlaps the bar */
+  padding-left: 26px;
 }
 .menu-item[aria-current="page"]::before{
   content: "";
   position: absolute;
-  left: 4px;                          /* push accent closer to the item’s left edge */
-  top: 8px;
-  bottom: 8px;
+  left: 4px; top: 8px; bottom: 8px;
   width: 4px;
   border-radius: 6px;
   background: linear-gradient(180deg, var(--accent-green), #16a34a);
@@ -347,36 +300,139 @@ body {
 }
 
 .divider{
-  height: 1px;
-  border: 0;
+  height: 1px; border: 0;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
   margin: 10px 0 12px;
 }
 
 /* ===== CTA dropdown ===== */
-.cta-group{ position: relative; display: inline-block; }
+
+/* keep the wrapper sized to the button so children can be 100% width */
+.cta-group{
+  position: relative;
+  display: inline-block;
+  width: max-content; /* ensures the group width equals the button’s width */
+}
+
 .has-caret{ position: relative; padding-right: 38px; }
 .has-caret::after{
   content: "";
   position: absolute; right: 14px; top: 50%;
   width: 8px; height: 8px;
   border-right: 2px solid #fff; border-bottom: 2px solid #fff;
-  transform: translateY(-60%) rotate(45deg); opacity: .9;
+  transform: translateY(-60%) rotate(45deg);
+  opacity: .9;
+  transition: transform .2s ease, opacity .2s ease;
 }
-.cta-menu{
-  position: absolute; left: 50%; transform: translateX(-50%);
-  top: calc(100% + 10px); min-width: 260px;
-  background: var(--cta-bg); color: #fff; border-radius: 14px;
-  box-shadow: 0 14px 40px rgba(0,0,0,.35); padding: 8px; z-index: 5; display: none;
-}
-.cta-menu.show{ display: block; }
-.cta-item{
-  display: block; padding: 12px 14px; margin: 4px 0; border-radius: 10px;
-  color: #fff; text-decoration: none; font-weight: 700; text-align: center;
-}
-.cta-item:hover{ filter: brightness(1.05); }
 
-/* ===== Responsive background framing ===== */
+/* ▼ NEW: panel matches button width exactly */
+.cta-menu{
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;          /* makes width = wrapper (button) width */
+  width: 100%;
+  max-height: 70vh;
+
+  overflow: auto;
+  scrollbar-gutter: stable both-edges;
+  padding: 10px 12px;
+
+  background: rgba(22,163,74,0.65);
+  backdrop-filter: blur(12px) saturate(130%);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.40);
+  color: #fff;
+  z-index: 5;
+  display: none;
+  transform-origin: top center;
+}
+.cta-menu.show{
+  display: block;
+  animation: ctaFadeIn .28s ease forwards;
+}
+
+/* Optional: tidy scrollbar in WebKit */
+.cta-menu::-webkit-scrollbar{ width: 10px; }
+.cta-menu::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.35); border-radius: 10px; }
+.cta-menu::-webkit-scrollbar-track{ background: transparent; }
+
+/* menu items */
+.cta-item{
+  position: relative;
+  display: block;
+  padding: 12px 14px;
+  margin: 6px 0;
+  border-radius: 12px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+  text-align: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: background .25s ease, transform .18s ease, filter .18s ease;
+}
+.cta-item:hover{
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+/* DFW caret spacing */
+.cta-item.menu-caret{ padding-right: 48px; }
+.cta-item.menu-caret::after{ right: 18px; }
+
+.cta-item.disabled{ opacity: .55; filter: grayscale(.1); cursor: not-allowed; }
+
+/* Submenu (stays perfectly centered because parent panel is now 100% of button width) */
+.menu-caret{ text-align: center; }
+.cta-item[aria-expanded="true"].menu-caret::after{
+  transform: translateY(-60%) rotate(-135deg);
+}
+.cta-submenu{
+  display: none;
+  margin: 8px 0 4px;
+  padding: 8px;
+  background: rgba(0,0,0,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+}
+.cta-submenu.show{ display: block; animation: ctaFadeIn .25s ease forwards; }
+
+.cta-subitem{
+  display: block;
+  margin: 4px 0;
+  padding: 11px 12px;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  font-weight: 700;
+  transition: background .25s ease, transform .18s ease, filter .18s ease;
+}
+.cta-subitem:hover{
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+/* Glow ring on active/expanded button */
+.cta:focus-visible,
+.cta[aria-expanded="true"]{
+  box-shadow: 0 0 0 6px rgba(34,197,94,0.28), var(--shadow);
+}
+
+/* Opening animation (no horizontal centering math needed now) */
+@keyframes ctaFadeIn{
+  from{ opacity: 0; transform: translateY(-6px) scale(.98); }
+  to  { opacity: 1; transform: translateY(0)      scale(1); }
+}
+
+/* Responsive background framing */
 @media (max-aspect-ratio: 9/16) {
   :root { --bg-pos: 50% 76%; --bg-fit: cover; }
 }
