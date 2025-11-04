@@ -184,3 +184,14 @@
     });
   }
 })();
+
+/* ===== Widow control fallback (Chrome & Safari) ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  const nodes = document.querySelectorAll('.bubble-centered h2, .bubble-centered p');
+  nodes.forEach(el => {
+    if (el.children.length) return; // skip elements with nested markup
+    const txt = el.innerHTML.trim();
+    // Replace the last regular space with a non-breaking space to avoid single-word last lines
+    el.innerHTML = txt.replace(/\s+([^\s<]{1,12})(\s*)$/, '&nbsp;$1$2');
+  });
+});
