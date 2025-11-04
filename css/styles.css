@@ -128,7 +128,7 @@ body {
   margin: 0 auto;
   padding: 22px 22px 18px;
   position: relative;
-  margin-top: 36vh;
+  margin-top: 36vh; /* default for pages with a hero */
 }
 .bubble::before{
   content: "";
@@ -205,6 +205,20 @@ body {
     margin-right: auto;
     max-width: 34ch;
   }
+}
+
+/* ===== About page only: raise the bubble to where the header used to be ===== */
+/* Preferred: add class="page-about" to <body> on about.html */
+.page-about .bubble { margin-top: 18vh; }
+@media (max-width: 480px){
+  .page-about .bubble { margin-top: 14vh; }
+}
+
+/* Fallback if you forget the body class: pages without a .hero get the same spacing
+   (supported in modern Chrome and Safari) */
+.wrap:not(:has(> .hero)) .bubble { margin-top: 18vh; }
+@media (max-width: 480px){
+  .wrap:not(:has(> .hero)) .bubble { margin-top: 14vh; }
 }
 
 /* Footer */
